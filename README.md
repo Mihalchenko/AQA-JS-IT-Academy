@@ -1,1 +1,1 @@
-# AQA-JS-IT-Academy
+# AQA-JS-IT-Academy Mihalchenko Sergey
