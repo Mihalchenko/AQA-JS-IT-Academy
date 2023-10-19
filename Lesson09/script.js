@@ -34,10 +34,61 @@ checkIterationNum(320, 5);
 
 //3. Дан массив arr. Найдите среднее арифметическое его элементов. Проверьте задачу на массиве с элементами 12, 15, 20, 25, 59, 79.
 
-let array = [12,15,20,25,59,79];
+let array1 = [12,15,20,25,59,79];
 
 function findAverage (arr) {
     return arr.reduce((sum,curr) => sum + curr, 0)/arr.length;
 };
 
-console.log(findAverage(array));
+console.log(findAverage(array1));
+
+//4. Напишите функцию, которая вставит данные в массив с заданного места в массиве. Дан массив [1, 2, 3, 4, 5]. Сделайте из него массив [1, 2, 3, 'a', 'b', 'c', 4, 5].
+
+let array2 = [1, 2, 3, 4, 5];
+
+function changeArray1 (arr, position, ...rest) {
+    for (i = 0; i < rest.length; i++) {
+        arr.splice(i+position, 0, rest[i]);
+    };
+
+    return arr;
+};
+
+console.log(changeArray1(array2, 3, "a", "b", "c"));
+
+//5. Взять два массива и сделать таксировать элементы чередовались.
+
+let array3 = [1, 2, 3, 4, 5];
+let array4 = ['a','b','c','d','e','f'];
+
+function arrayJoin (arr1, arr2) {
+    let newArr = [];
+    arr1.forEach(function(item,i) {
+        // if (arr2.length > i) {
+        //     arr1.splice(i, 0, arr2.splice(i));
+        // } else {
+            arr1.splice(i, 0, arr2[i]);
+        // }
+    });
+
+    return arr1;
+};
+
+console.log(arrayJoin(array3, array4));
+
+//6. Дан массив [3, 4, 1, 2, 7. 30. 50]. Отсортируйте его.
+
+let array5 = [3, 4, 1, 2, 7, 30, 50];
+
+let arraySort = function (arr, sortBy) {
+    if (sortBy == "min") {
+        arr.sort((a,b) => a-b);
+    } else if (sortBy == "max") {
+        arr.sort((a,b) => b-a);
+    };
+
+    return arr;
+};
+
+console.log(arraySort(array5, "min"));
+console.log(arraySort(array5, "max"));
