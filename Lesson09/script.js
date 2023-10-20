@@ -56,22 +56,20 @@ function changeArray1 (arr, position, ...rest) {
 
 console.log(changeArray1(array2, 3, "a", "b", "c"));
 
-//5. Взять два массива и сделать таксировать элементы чередовались.
+//5. Взять два массива и сделать так, чтобы элементы чередовались.
 
 let array3 = [1, 2, 3, 4, 5];
 let array4 = ['a','b','c','d','e','f'];
 
 function arrayJoin (arr1, arr2) {
     let newArr = [];
-    arr1.forEach(function(item,i) {
-        // if (arr2.length > i) {
-        //     arr1.splice(i, 0, arr2.splice(i));
-        // } else {
-            arr1.splice(i, 0, arr2[i]);
-        // }
-    });
+    let maxLength = arr1.length >= arr2.length ? arr1.length : arr2.length;
+    for (i = 0; i < maxLength; i++) {
+        arr1[i] && newArr.push(arr1[i]);
+        arr2[i] && newArr.push(arr2[i]);
+    };
 
-    return arr1;
+    return newArr;
 };
 
 console.log(arrayJoin(array3, array4));
