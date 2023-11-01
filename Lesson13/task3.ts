@@ -25,23 +25,23 @@ export class ObjectManipulator {
  */
 export class ObjectManipulator {
 
-    constructor(protected obj: object) {}
+    constructor(protected obj: object) {};
 
     public set(key: string, value: any): object {
         return new ObjectManipulator({...this.obj, [key]: value});
-    }
+    };
 
     public get(key: string): any {
         return this.obj[key];
-    }
+    };
 
     public delete(key: string): object {
         const newObj = {...this.obj};
         delete newObj[key];
         return new ObjectManipulator(newObj);
-    }
+    };
 
     public getObject(): object {
         return this.obj;
-    }
-}
+    };
+};
