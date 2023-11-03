@@ -14,7 +14,7 @@ children: 2
     }
 ];
 */
-interface User {
+export interface User {
     name: string;
     age: number;
     occupation: string;
