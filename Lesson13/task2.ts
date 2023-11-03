@@ -3,7 +3,7 @@
 
 type Person = unknown;
 
-const persons: User[] = [
+const persons: Person[] = [
     {
         name: 'Max Mustermann',
         age: 25,
