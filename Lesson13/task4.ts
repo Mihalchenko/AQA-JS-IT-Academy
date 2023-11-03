@@ -15,19 +15,19 @@
  * @param {Array} input
  * @return {Array | Function}
  */
-export function map(mapper, input) {
+export function map(mapper: Function, input: any[]): Function | any[] {
     if (arguments.length === 0) {
         return map;
     };
     if (arguments.length === 1) {
-        return function subFunction(subInput) {
+        return function subFunction(subInput: any[]): Function | any[] {
             if (arguments.length === 0) {
                 return subFunction;
             };
-            return subInput.map(mapper);
+            return subInput.map(mapper());
         };
     };
-    return input.map(mapper);
+    return input.map(mapper());
 };
 
 
@@ -47,19 +47,19 @@ export function map(mapper, input) {
  * @param {Array} input
  * @return {Array | Function}
  */
-export function filter(filterer, input) {
+export function filter(filterer: Function, input: any[]): Function | any[] {
     if (arguments.length === 0) {
         return filter;
     };
     if (arguments.length === 1) {
-        return function subFunction(subInput) {
+        return function subFunction(subInput: any[]): Function | any[] {
             if (arguments.length === 0) {
                 return subFunction;
             };
-            return subInput.filter(filterer);
+            return subInput.filter(filterer());
         };
     };
-    return input.filter(filterer);
+    return input.filter(filterer());
 };
 
 
@@ -75,12 +75,12 @@ export function filter(filterer, input) {
  * @param {Number} b
  * @return {Number | Function}
  */
-export function add(a, b) {
+export function add(a: number, b: number): number | Function {
     if (arguments.length === 0) {
         return add;
     };
     if (arguments.length === 1) {
-        return function subFunction(subB) {
+        return function subFunction(subB: number): number | Function {
             if (arguments.length === 0) {
                 return subFunction;
             };
