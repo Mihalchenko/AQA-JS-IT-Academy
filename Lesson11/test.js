@@ -31,12 +31,14 @@ class CarBuilder {
 
 class Taxi {
     constructor() {
-        this.cars = [];
+        this.cars = {};
     }
 
     addCar(car, type) {
-        car.type = type;
-        this.cars.push(car);
+        if (!this.cars[type]) {
+            this.cars[type] = [];
+        }
+        this.cars[type].push(car);
     }
 
     getCars() {
@@ -48,6 +50,7 @@ class Comfort {
     constructor(car, carMediator) {
         this.carMediator = carMediator;
         this.car = car;
+        this.car.type = 'comfort';
     }
 
     addCar() {
@@ -59,6 +62,7 @@ class Econom {
     constructor(car, carMediator) {
         this.carMediator = carMediator;
         this.car = car;
+        this.car.type = 'econom';
     }
 
     addCar() {
