@@ -63,6 +63,12 @@ class Taxi {
 
         return carsArray;
     };
+
+    countTotalPrice() {
+        let carsArray = this.createCarsArray();
+        let totalPrice = carsArray.reduce((sum,item) => sum + item.price, 0);
+        return totalPrice;
+    };
 };
 
 class Comfort {
@@ -105,3 +111,4 @@ new Econom(LadaVesta, taxi).addCar();
 
 console.log(taxi.getCars());
 console.log(taxi.sortByConsumption('max'));
+console.log(taxi.countTotalPrice());
