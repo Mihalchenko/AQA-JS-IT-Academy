@@ -38,6 +38,15 @@ class Taxi {
         let totalPrice = carsArray.reduce((sum,item) => sum + item.price, 0);
         return totalPrice;
     };
+
+    filterByConsumption(criteria, value) {
+        let carsArray = this.createCarsArray();
+        if (criteria == "more") {
+            return carsArray.filter((item) => item.consumption >= value);
+        } else if (criteria == "less") {
+            return carsArray.filter((item) => item.consumption <= value);
+        };
+    };
 };
 
 module.exports = Taxi;

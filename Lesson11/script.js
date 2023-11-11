@@ -23,3 +23,4 @@ new Buisness(MercedesS600, taxi).addCar();
 console.log(taxi.getCars());
 console.log(taxi.sortByConsumption('max'));
 console.log(taxi.countTotalPrice());
+console.log(taxi.filterByConsumption("more", 10));
