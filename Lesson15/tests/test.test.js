@@ -10,13 +10,12 @@ describe(`Calculator tests`, function () {
         ];
         
         test.each(testData)(`Should return $total after summing $numbers`, async ({numbers, total}) => {
-            console.log(Array.isArray(numbers));
-            const result = calcMethods.add(numbers);
+            const result = calcMethods.add(...numbers);
             await expect(result).toEqual(total);
         });
 
         test.each(testData)(`Should return type "number" after summing nums $numbers`, async ({numbers}) => {
-            const result = calcMethods.add(numbers);
+            const result = calcMethods.add(...numbers);
             await expect(typeof result).toBe("number");
         });
     });
@@ -28,13 +27,12 @@ describe(`Calculator tests`, function () {
         ];
         
         test.each(testData)(`Should return $total after multiplying $numbers`, async ({numbers, total}) => {
-            console.log(Array.isArray(numbers));
-            const result = calcMethods.multiply(numbers);
+            const result = calcMethods.multiply(...numbers);
             await expect(result).toEqual(total);
         });
 
         test.each(testData)(`Should return type "number" after multiplying $numbers`, async ({numbers}) => {
-            const result = calcMethods.multiply(numbers);
+            const result = calcMethods.multiply(...numbers);
             await expect(typeof result).toBe("number");
         });
     });
@@ -79,12 +77,12 @@ describe(`Calculator tests`, function () {
             [12, 144]
         ];
 
-        test.each(testData)(`Exponentiation %i should return %i`, async (a,sum) => {
+        test.each(testData)(`Exponentiation of %i should return %i`, async (a,sum) => {
             const result = calcMethods.exponentiation(a);
             await expect(result).toEqual(sum);
         });
 
-        test.each(testData)(`Should return type "number" after exponentiation %i`, async (a) => {
+        test.each(testData)(`Should return type "number" after exponentiation of %i`, async (a) => {
             const result = calcMethods.exponentiation(a);
             await expect(typeof result).toBe("number");
         });

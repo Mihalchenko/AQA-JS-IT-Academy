@@ -13,7 +13,7 @@
      * @return {Number} sum of numbers
      * @memberof Calculator
      */
-    add(theArgs) {
+    add(...theArgs) {
         let result = 0;
         for (let i = 0; i < theArgs.length; i++) {
           result += theArgs[i];
@@ -28,7 +28,7 @@
      * @return {Number}
      * @memberof Calculator
      */
-    multiply(theArgs) {
+    multiply(...theArgs) {
         let result = 1;
         for (let i = 0; i < theArgs.length; i++) {
           result = result * theArgs[i];
