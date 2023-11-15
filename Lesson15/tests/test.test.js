@@ -55,4 +55,38 @@ describe(`Calculator tests`, function () {
             await expect(typeof result).toBe("number");
         });
     });
+
+    describe(`Divide functions tests`, function () {
+        const testData = [
+            [21,7,3],
+            [14,2,7]
+        ];
+
+        test.each(testData)(`Division %i by %i should return %i`, async (a,b,sum) => {
+            const result = calcMethods.divide(a,b);
+            await expect(result).toEqual(sum);
+        });
+
+        test.each(testData)(`Should return type "number" after division %i and %i`, async (a,b) => {
+            const result = calcMethods.divide(a,b);
+            await expect(typeof result).toBe("number");
+        });
+    });
+
+    describe(`Exponentiation functions tests`, function () {
+        const testData = [
+            [5, 25],
+            [12, 144]
+        ];
+
+        test.each(testData)(`Exponentiation %i should return %i`, async (a,sum) => {
+            const result = calcMethods.exponentiation(a);
+            await expect(result).toEqual(sum);
+        });
+
+        test.each(testData)(`Should return type "number" after exponentiation %i`, async (a) => {
+            const result = calcMethods.exponentiation(a);
+            await expect(typeof result).toBe("number");
+        });
+    });
 });
