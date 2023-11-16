@@ -5,7 +5,7 @@
  */
  class Calculator {
     constructor() {
-    };
+    }
     /**
      *
      *
@@ -20,7 +20,7 @@
         }
   
         return result;
-    };
+    }
     /**
      *
      *
@@ -34,7 +34,7 @@
           result = result * theArgs[i];
         }
         return result;
-    };
+    }
     
     subtraction(reduced, subtrahend) {
         return reduced - subtrahend;
@@ -47,6 +47,6 @@
     exponentiation(number) {
         return number * number;
     }
-  };
+  }
   
   module.exports = Calculator;
