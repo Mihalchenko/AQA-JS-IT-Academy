@@ -1,4 +1,4 @@
-const { Builder, By } = require('selenium-webdriver');
+const { Builder, By, until } = require('selenium-webdriver');
 const { expect } = require('chai');
 
 describe('Chromdriver website tests', () => {
@@ -6,7 +6,7 @@ describe('Chromdriver website tests', () => {
 
     before(async () => {
         driver = new Builder().forBrowser('chrome').build();
-
+        await driver.manage().window().setSize({width: 760, height: 1280});
         await driver.get('https://chromedriver.chromium.org/home');
     });
 
@@ -22,10 +22,17 @@ describe('Chromdriver website tests', () => {
 
     it(`Title on page "Extensions" should be "Chrome Extensions"`, async() => {        
         let browserSize = await driver.manage().window().getSize();
-        if (browserSize.width < 1234) {
+        
+        if (browserSize.width < 1234 && browserSize.width >= 768) {
             const moreMenuButton = await driver.findElement(By.css('nav#WDxLfe li[more-menu-item]'));
             await moreMenuButton.click();
             const extensionButton = await driver.findElement(By.css('nav#WDxLfe li[more-menu-item] a[data-url="/extensions"]'));
+            await extensionButton.click();
+        } else if (browserSize.width < 768) {
+            const moreMenuButton = await driver.findElement(By.css('header#atIdViewHeader > div > div[role="button"]'));
+            await moreMenuButton.click();
+            const extensionButton = await driver.findElement(By.css('header#atIdViewHeader nav[jsname="ihoMLd"] a[data-url="/extensions"]'));
+            await driver.wait(until.elementIsVisible(extensionButton), 1000);
             await extensionButton.click();
         } else {
             const extensionButton = await driver.findElement(By.css(`nav#WDxLfe li[data-nav-level="1"] > div > div a[data-url="/extensions"]`));
@@ -36,5 +43,5 @@ describe('Chromdriver website tests', () => {
         await driver.executeScript("arguments[0].style.backgroundColor='red'", mainTitle);
 
         expect(await mainTitle.getText()).to.equal('Chrome Extensions');
-    });
+    })
 });
