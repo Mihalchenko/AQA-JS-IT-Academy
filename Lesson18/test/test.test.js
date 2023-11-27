@@ -1,4 +1,4 @@
-const { Builder, By, until } = require('selenium-webdriver');
+const { Builder, By, until, Key } = require('selenium-webdriver');
 const { expect } = require('chai');
 
 describe('Chromdriver website tests', () => {
@@ -6,7 +6,7 @@ describe('Chromdriver website tests', () => {
 
     before(async () => {
         driver = new Builder().forBrowser('chrome').build();
-        await driver.manage().window().setSize({width: 760, height: 1280});
+
         await driver.get('https://chromedriver.chromium.org/home');
     });
 
@@ -43,5 +43,20 @@ describe('Chromdriver website tests', () => {
         await driver.executeScript("arguments[0].style.backgroundColor='red'", mainTitle);
 
         expect(await mainTitle.getText()).to.equal('Chrome Extensions');
-    })
+    });
+
+    it(`Search by word 'driver' should return pages contains 'driver'`, async() => {
+        const searchButton = await driver.findElement(By.css('div[jsname="h04Zod"] > div[role="button"]'));
+        await searchButton.click();
+        const inputBlock = await driver.findElement(By.css('input[type="search"]'));
+        await driver.wait(until.elementIsVisible(inputBlock), 1000);
+        await inputBlock.sendKeys("driver");
+        await inputBlock.sendKeys(Key.ENTER);
+
+        // await driver.wait(until.elementIsVisible(By.css('div.lZsZxe')), 1000);
+        // const linksBlock = await driver.findElement(By.css('div.lZsZxe'));
+        // console.log(linksBlock);
+        // const firstLinkDescription = await driver.findElements(By.css('div.yDWqEe'))[0];
+        // console.log(firstLinkDescription.getText())
+    });
 });
