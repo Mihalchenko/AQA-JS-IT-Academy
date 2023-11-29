@@ -32,7 +32,7 @@ describe('Chromdriver website tests', () => {
             const moreMenuButton = await driver.findElement(By.css('header#atIdViewHeader > div > div[role="button"]'));
             await moreMenuButton.click();
             const extensionButton = await driver.findElement(By.css('header#atIdViewHeader nav[jsname="ihoMLd"] a[data-url="/extensions"]'));
-            await driver.wait(until.elementIsVisible(extensionButton), 1000);
+            await driver.wait(until.elementIsVisible(extensionButton), 2000);
             await extensionButton.click();
         } else {
             const extensionButton = await driver.findElement(By.css(`nav#WDxLfe li[data-nav-level="1"] > div > div a[data-url="/extensions"]`));
@@ -49,14 +49,13 @@ describe('Chromdriver website tests', () => {
         const searchButton = await driver.findElement(By.css('div[jsname="h04Zod"] > div[role="button"]'));
         await searchButton.click();
         const inputBlock = await driver.findElement(By.css('input[type="search"]'));
-        await driver.wait(until.elementIsVisible(inputBlock), 1000);
+        await driver.wait(until.elementIsVisible(inputBlock), 2000);
         await inputBlock.sendKeys("driver");
         await inputBlock.sendKeys(Key.ENTER);
 
-        // await driver.wait(until.elementIsVisible(By.css('div.lZsZxe')), 1000);
-        // const linksBlock = await driver.findElement(By.css('div.lZsZxe'));
-        // console.log(linksBlock);
-        // const firstLinkDescription = await driver.findElements(By.css('div.yDWqEe'))[0];
-        // console.log(firstLinkDescription.getText())
+        await driver.wait(until.elementLocated((By.css('div.lZsZxe'))), 2500);
+        
+        const firstLinkDescription = await driver.findElements(By.css('div.yDWqEe b:first-child'));
+        expect((await firstLinkDescription[0].getText()).toLowerCase()).to.equal('driver');
     });
 });
