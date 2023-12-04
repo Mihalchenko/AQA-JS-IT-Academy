@@ -31,4 +31,10 @@ describe('wdio website testing', () => {
         await deLangButton.click();
         expect(await $('.navbar__item.dropdown a.navbar__link').getText()).to.equal('Deutsch');
     });
+
+    it('Title on page API with Deutch lang should be "Einleitung"', async () => {
+        const apiHeaderButton = await $('.navbar__items a[href="/de/docs/api"]');
+        await apiHeaderButton.click();
+        expect(await $('main h1').getText()).to.equal('Einleitung');
+    });
 });
