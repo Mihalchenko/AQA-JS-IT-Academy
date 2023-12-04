@@ -36,7 +36,11 @@ describe('wdio website testing', () => {
   it('Title on page API with Deutch lang should be "Einleitung"', async () => {
     const apiHeaderButton = await $('.navbar__items a[href="/de/docs/api"]');
     await apiHeaderButton.click();
-    // ТУТ ОЖИДАЛКУ
+    const mainTitle = await $('main h1');
+    await browser.waitUntil(async () => (await mainTitle.getText()) !== 'Allure Reporter', {
+      timeout: 5000,
+      timeoutMsg: 'expected text to be different after 5s',
+    });
     expect(await $('main h1').getText()).to.equal('Einleitung');
   });
 });
