@@ -1,5 +1,5 @@
 {
-  "name": "Lesson19",
+  "name": "lesson19",
   "type": "module",
   "devDependencies": {
     "@wdio/allure-reporter": "^8.24.2",
@@ -9,9 +9,11 @@
     "@wdio/spec-reporter": "^8.24.2"
   },
   "scripts": {
-    "wdio": "wdio run ./wdio.conf.js"
+    "wdio": "wdio run ./wdio.conf.js",
+    "open-report": "allure generate allure-results && allure open"
   },
   "dependencies": {
+    "allure-commandline": "^2.24.1",
     "chai": "^4.3.10"
   }
 }
