@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import homePage from '../page-objects/homePage.js';
 import headerComponent from '../page-objects/page-components/headerComponent.js';
+import searchComponent from '../page-objects/page-components/searchComponent.js';
 
 describe('wdio website testing', () => {
   it('Title on page API should be "Introduction"', async () => {
@@ -10,19 +11,13 @@ describe('wdio website testing', () => {
   });
 
   it('Search by "allure" should return "Allure reporter" page', async () => {
-    const searchButton = await $('.DocSearch.DocSearch-Button');
-    await searchButton.click();
-    const searchInput = await $('input.DocSearch-Input');
-    await searchInput.setValue('allure');
-    const searchResultFirstLink = await $('li#docsearch-item-0 a');
-    await searchResultFirstLink.click();
+    await searchComponent.searchByText('allure');
     expect(await homePage.pageMainTitle.getText()).to.equal('Allure Reporter');
   });
 
   it('Switch to dark theme should switch html data-theme to "dark"', async () => {
-    const switchThemeButton = await $('.colorModeToggle_DEke');
-    await switchThemeButton.click();
-    expect(await $('html[data-theme]').getAttribute('data-theme')).to.equal('dark');
+    await headerComponent.switchTheme();
+    expect(await homePage.getCurrentTheme()).to.equal('dark');
   });
 
   it('Changing language to "Deutch" should return "Deutch"', async () => {
