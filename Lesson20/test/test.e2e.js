@@ -16,26 +16,22 @@ describe('wdio website testing', () => {
   });
 
   it('Switch to dark theme should switch html data-theme to "dark"', async () => {
-    await headerComponent.switchTheme();
-    expect(await homePage.getCurrentTheme()).to.equal('dark');
+    await headerComponent.switchColorTheme();
+    expect(await homePage.getCurrentColorTheme()).to.equal('dark');
   });
 
-  it('Changing language to "Deutch" should return "Deutch"', async () => {
-    const langDropdownMenu = await $('.navbar__item.dropdown');
-    await langDropdownMenu.click();
-    const deLangButton = await $('.dropdown__menu a[lang="de"]');
-    await deLangButton.click();
-    expect(await $('.navbar__item.dropdown a.navbar__link').getText()).to.equal('Deutsch');
+  it('Changing language to "Deutch" should return "de" in html lang', async () => {
+    await headerComponent.changeWebsiteLang('de');
+    expect(await homePage.getCurrentLang()).to.equal('de');
   });
 
   it('Title on page API with Deutch lang should be "Einleitung"', async () => {
-    const apiHeaderButton = await $('.navbar__items a[href="/de/docs/api"]');
-    await apiHeaderButton.click();
+    await headerComponent.goToApiPage();
     const mainTitle = await $('main h1');
     await browser.waitUntil(async () => (await mainTitle.getText()) !== 'Allure Reporter', {
       timeout: 5000,
       timeoutMsg: 'expected text to be different after 5s',
     });
-    expect(await $('main h1').getText()).to.equal('Einleitung');
+    expect(await homePage.getMainTitleText()).to.equal('Einleitung');
   });
 });

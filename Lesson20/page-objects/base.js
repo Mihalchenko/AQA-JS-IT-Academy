@@ -13,10 +13,16 @@ class Base {
     return text;
   };
 
-  async getCurrentTheme() { // тоже есть на всех страницах
-    const htmlEl = await $('html[data-theme]');
-    const currentTheme = await htmlEl.getAttribute('data-theme');
+  async getCurrentColorTheme() { // тоже есть на всех страницах
+    const html = await $('html[data-theme]');
+    const currentTheme = await html.getAttribute('data-theme');
     return currentTheme;
+  };
+
+  async getCurrentLang() {
+    const html = await $('html[lang]');
+    const currentLang = await html.getAttribute('lang');
+    return currentLang;
   };
 };
 

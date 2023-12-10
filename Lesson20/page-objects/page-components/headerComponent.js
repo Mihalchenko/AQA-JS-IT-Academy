@@ -6,11 +6,15 @@ class HeaderComponent extends Base {
   };
 
   get apiPageButton() {
-    return $('.navbar__items a[href="/docs/api"]');
+    return $(`//nav//div[contains(@class,"navbar__items")][position() = 1]//a[contains(@href,"docs/api")]`);
   };
 
   get colorModeButton() {
     return $('.colorModeToggle_DEke');
+  };
+
+  get langDropdownMenu() {
+    return $('.navbar__item.dropdown a.navbar__link');
   };
 
   async goToApiPage() {
@@ -18,11 +22,19 @@ class HeaderComponent extends Base {
     await this.apiPageButton.click();
   }
 
-  async switchTheme() {
+  async switchColorTheme() {
     await this.colorModeButton.waitForClickable();
     await this.colorModeButton.click();
   };
 
-}
+  async changeWebsiteLang(lang) {
+    await this.langDropdownMenu.waitForClickable();
+    await this.langDropdownMenu.click();
+    let langButton = await $(`.dropdown__menu a[lang="${lang}"]`);
+    await langButton.waitForClickable();
+    await langButton.click();
+  };
+
+};
 
 export default new HeaderComponent();
