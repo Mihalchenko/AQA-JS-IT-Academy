@@ -1,12 +1,12 @@
 import { expect } from 'chai';
 import homePage from '../page-objects/homePage.js';
+import headerComponent from '../page-objects/page-components/headerComponent.js';
 
 describe('wdio website testing', () => {
   it('Title on page API should be "Introduction"', async () => {
     await homePage.navigate('https://webdriver.io/');
-    const apiHeaderButton = await $('.navbar__items a[href="/docs/api"]');
-    await apiHeaderButton.click();
-    expect(await $('main h1').getText()).to.equal('Introduction');
+    await headerComponent.apiButton.click();
+    expect(await homePage.pageMainTitle.getText()).to.equal('Introduction');
   });
 
   it('Search by "allure" should return "Allure reporter" page', async () => {
@@ -16,7 +16,7 @@ describe('wdio website testing', () => {
     await searchInput.setValue('allure');
     const searchResultFirstLink = await $('li#docsearch-item-0 a');
     await searchResultFirstLink.click();
-    expect(await $('main h1').getText()).to.equal('Allure Reporter');
+    expect(await homePage.pageMainTitle.getText()).to.equal('Allure Reporter');
   });
 
   it('Switch to dark theme should switch html data-theme to "dark"', async () => {
