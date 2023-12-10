@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import { expect, describe, it } from 'chai';
 import homePage from '../page-objects/homePage.js';
 import headerComponent from '../page-objects/page-components/headerComponent.js';
 import searchComponent from '../page-objects/page-components/searchComponent.js';
@@ -12,6 +12,7 @@ describe('wdio website testing', () => {
 
   it('Search by "allure" should return "Allure reporter" page', async () => {
     await searchComponent.searchByText('allure');
+    await homePage.waitForTitleChange('Introduction');
     expect(await homePage.getMainTitleText()).to.equal('Allure Reporter');
   });
 
@@ -27,11 +28,7 @@ describe('wdio website testing', () => {
 
   it('Title on page API with Deutch lang should be "Einleitung"', async () => {
     await headerComponent.goToApiPage();
-    const mainTitle = await $('main h1');
-    await browser.waitUntil(async () => (await mainTitle.getText()) !== 'Allure Reporter', {
-      timeout: 5000,
-      timeoutMsg: 'expected text to be different after 5s',
-    });
+    await homePage.waitForTitleChange('Allure Reporter');
     expect(await homePage.getMainTitleText()).to.equal('Einleitung');
   });
 });
