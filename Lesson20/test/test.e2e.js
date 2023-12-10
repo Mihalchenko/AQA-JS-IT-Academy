@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import homePage from '../page-objects/homePage';
+import homePage from '../page-objects/homePage.js';
 
 describe('wdio website testing', () => {
   it('Title on page API should be "Introduction"', async () => {
