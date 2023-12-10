@@ -6,13 +6,13 @@ import searchComponent from '../page-objects/page-components/searchComponent.js'
 describe('wdio website testing', () => {
   it('Title on page API should be "Introduction"', async () => {
     await homePage.navigate('https://webdriver.io/');
-    await headerComponent.apiButton.click();
-    expect(await homePage.pageMainTitle.getText()).to.equal('Introduction');
+    await headerComponent.goToApiPage();
+    expect(await homePage.getMainTitleText()).to.equal('Introduction');
   });
 
   it('Search by "allure" should return "Allure reporter" page', async () => {
     await searchComponent.searchByText('allure');
-    expect(await homePage.pageMainTitle.getText()).to.equal('Allure Reporter');
+    expect(await homePage.getMainTitleText()).to.equal('Allure Reporter');
   });
 
   it('Switch to dark theme should switch html data-theme to "dark"', async () => {
