@@ -1,4 +1,5 @@
-import { expect, describe, it } from 'chai';
+import { expect } from 'chai';
+import { describe, it } from 'mocha';
 import homePage from '../page-objects/homePage.js';
 import headerComponent from '../page-objects/page-components/headerComponent.js';
 import searchComponent from '../page-objects/page-components/searchComponent.js';
