@@ -1,9 +1,9 @@
-/* eslint-disable no-undef */
 import { expect } from 'chai';
+import homePage from '../page-objects/homePage';
 
 describe('wdio website testing', () => {
   it('Title on page API should be "Introduction"', async () => {
-    await browser.url('https://webdriver.io/');
+    await homePage.navigate('https://webdriver.io/');
     const apiHeaderButton = await $('.navbar__items a[href="/docs/api"]');
     await apiHeaderButton.click();
     expect(await $('main h1').getText()).to.equal('Introduction');
