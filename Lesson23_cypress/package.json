@@ -9,6 +9,7 @@
   "author": "mihalchenko",
   "license": "ISC",
   "dependencies": {
+    "chai": "^4.3.10",
     "cypress": "^13.6.1"
   }
 }
