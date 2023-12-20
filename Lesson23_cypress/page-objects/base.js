@@ -1,7 +1,8 @@
 class Base {
     navigate(url) {
-      cy.visit(url)
+      cy.visit(url);
     }
+
   }
   
 export { Base };
