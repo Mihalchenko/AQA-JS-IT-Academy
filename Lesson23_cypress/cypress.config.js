@@ -4,6 +4,7 @@ module.exports = defineConfig({
   viewportWidth: 1920,
   viewportHeight: 1280,
   e2e: {
+    testIsolation: false,
     setupNodeEvents(on, config) {
       on('before:browser:launch', (browser = {}, launchOptions) => {
         if (browser.family === 'chromium' && browser.name !== 'electron') {
