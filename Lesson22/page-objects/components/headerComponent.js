@@ -20,6 +20,19 @@ class HeaderComponent extends BasePage {
       async switchColorTheme() {
         await this.colorModeButton.click();
       }
+
+     get programmLangButton() {
+      return this.page.locator('div.navbar__items div.dropdown');
+     }
+
+     get changeToJavaLangButton() {
+      return this.page.locator('ul.dropdown__menu a[href="/java/"]');
+     }
+
+     async changeToJavaLang() {
+      await this.programmLangButton.click();
+      await this.changeToJavaLangButton.click();
+     }
     
 }
 

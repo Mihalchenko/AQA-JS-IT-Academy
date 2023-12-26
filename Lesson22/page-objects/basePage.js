@@ -11,6 +11,15 @@ class BasePage {
       return this.page.locator('main h1');
     }
 
+    get pageName() {
+      return this.page.locator('b.navbar__title');
+    }
+
+    async getPageName() {
+      const text = await this.pageName.textContent();
+      return text;
+    }
+
     async getMainTitleText() {
       await this.pageMainTitle.waitFor({state: "visible", timeout: 5000});
       const text = await this.pageMainTitle.textContent();

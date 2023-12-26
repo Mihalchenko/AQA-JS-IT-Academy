@@ -30,4 +30,10 @@ test.describe('Playwright website testing', function () {
     await headerComponent.switchColorTheme();
     expect(await basePage.getCurrentColorTheme()).toEqual('dark');
   });
+
+  test('Switch from "Node.js" to "Java" should return "Playwright for Java" in page name', async () => {
+    await basePage.navigate('https://playwright.dev/');
+    await headerComponent.changeToJavaLang();
+    expect(await basePage.getPageName()).toEqual('Playwright for Java');
+  });
 })
