@@ -13,6 +13,19 @@ class CartPage extends Base {
     return cy.get(`.cart-message__description a[href='https://catalog.onliner.by']`);
   }
 
+  get removeItemFromCartButton() {
+    return cy.get('a.cart-form__button_remove');
+  }
+
+  get closeRemovedItemButton() {
+    return cy.get('a.cart-form__link_other').eq(1);
+  }
+
+  removeItemFromCart() {
+    this.removeItemFromCartButton.realHover('mouse').click();
+    this.closeRemovedItemButton.click();
+  }
+
   goToCatalog() {
     this.catalogButton.click();
   }

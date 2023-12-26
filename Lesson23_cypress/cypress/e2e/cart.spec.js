@@ -26,4 +26,9 @@ describe('Onliner website cart testing', () => {
     cartPage.cartItemsList.should('exist');
   });
 
+  it('Deleting items from cart should return cart without item list', () => {
+    cartPage.removeItemFromCart();
+    cartPage.cartItemsList.should('not.exist');
+  });
+
 });
