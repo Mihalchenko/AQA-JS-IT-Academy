@@ -1,6 +1,9 @@
 import homePage from '../../page-objects/homePage.js';
 import headerComponent from '../../page-objects/components/headerComponent.js';
 import cartPage from '../../page-objects/cartPage.js';
+import catalogNavPage from '../../page-objects/catalogNavPage.js'
+import catalogItemsPage from '../../page-objects/catalogItemsPage.js';
+import productPage from '../../page-objects/productPage.js';
 
 describe('Onliner website cart testing', () => {
 
@@ -10,13 +13,17 @@ describe('Onliner website cart testing', () => {
     cartPage.cartItemsList.should('not.exist');
   });
 
-  it('Add items to cart', () => {
-    cartPage.navigate('https://catalog.onliner.by/notebook/honor/5301afvl');
-    cy.get('.product-aside__button_cart').first().click();
+  it('Add product to cart should show sidebar with text "Товар добавлен в корзину"', () => {
+    cartPage.goToCatalog();
+    catalogNavPage.goToSmartphones();
+    catalogItemsPage.openFirstItemPage();
+    productPage.addProductToCart();
+    productPage.cartSidebarHeader.should('contain', 'Товар добавлен в корзину');
   });
 
-  it('Open chart', () => {
-    cy.get(`div.product-recommended__sidebar-overflow a[href="https://cart.onliner.by"]`).click();
+  it('Cart should be opened with item list after adding items to cart', () => {
+    productPage.goToCartFromSidebar();
+    cartPage.cartItemsList.should('exist');
   });
 
 });
