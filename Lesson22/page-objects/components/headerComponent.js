@@ -18,7 +18,6 @@ class HeaderComponent extends BasePage {
       }
     
       async switchColorTheme() {
-        await this.colorModeButton.waitForClickable();
         await this.colorModeButton.click();
       }
     
