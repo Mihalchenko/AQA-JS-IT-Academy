@@ -1,0 +1,52 @@
+Website: https://www.bbc.co.uk/
+
+1. Элемент с картинкой:
+
+xPATH = //section[contains(@class, "module--promo")]//li[contains(@class, "media-list__item")]/div[contains(@class, "media--primary")]
+CSS = section.module--promo li.media-list__item div.media--primary
+
+2 . Топ нав меню:
+2.1. найти только первый видимый элемент
+
+xPATH = //nav[contains(@class, "orbit-header-links")]//li[position() = 1]/a[@data-v-item]
+CSS = nav.orbit-header-links li:first-child a[data-v-item]
+
+2.2. последний видимый элемент
+
+xPATH = (//nav[contains(@class, "orbit-header-links")]//a[@data-v-item])[last()]
+CSS = с помощью css это сделать нельзя, на :last-child нельзя наложить условие (это всегда последний элемент видимый или нет)
+
+2.3. найти все видимые элементы
+
+xPATH = //nav[contains(@class, "orbit-header-links")]//a[@data-v-item]
+CSS = nav.orbit-header-links a[data-v-item]
+
+2.4. все невидимые элементы
+
+xPATH = //nav[contains(@class, "orbit-header-links")]//a[not(@data-v-item)]
+CSS = nav.orbit-header-links a:not([data-v-item])
+
+2.5. найти нечетные элементы
+
+xPATH = //nav[contains(@class, "orbit-header-links")]//li[position() mod 2 = 0]
+CSS = nav.orbit-header-links li:nth-child(odd)
+
+3. Дата
+
+xPATH = //section[contains(@class, "module--header")]/h2[contains(@class, "module__title")]/child::text()
+CSS = не ищет по тексту
+
+4. Кликабельный элемент поиска
+
+xPATH = //div[contains(@class, "orb-nav-search")]/a[@id="orbit-search-button"]
+CSS = div.orb-nav-search a#orbit-search-button
+
+5. Лого
+
+xPATH = //div[contains(@class, "orb-nav-section")]/a[@id="homepage-link"]
+CSS = div.orb-nav-section a#homepage-link
+
+6. Новости блоком
+
+xPATH = //section[contains(@class, "module--promo")]//li[contains(@class, "media-list__item") and position() > 1]
+CSS = section.module--promo li.media-list__item:not(:first-child)
