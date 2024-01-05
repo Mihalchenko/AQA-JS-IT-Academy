@@ -9,6 +9,10 @@ class CatalogItemsPage extends Base {
     cy.get('a.js-product-title-link').first().click();
   }
 
+  get mainTitle() {
+    return cy.get('h1.schema-header__title');
+  }
+
 }
 
 export default new CatalogItemsPage();

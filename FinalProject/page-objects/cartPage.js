@@ -14,7 +14,7 @@ class CartPage extends Base {
     cy.get('a.cart-form__link_other').eq(1).click();
   }
 
-  goToCatalog() {
+  goToCatalogPage() {
     cy.get(`.cart-message__description a[href='https://catalog.onliner.by']`).click();
   }
 }

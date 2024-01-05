@@ -13,22 +13,26 @@ describe('Onliner website cart testing', () => {
     cartPage.cartItemsList.should('not.exist');
   });
 
-  it('Add product to cart should show sidebar with text "Товар добавлен в корзину"', () => {
-    cartPage.goToCatalog();
-    catalogNavPage.goToSmartphones();
+  it('Add product to cart from product page should show sidebar with text "Товар добавлен в корзину"', () => {
+    homePage.navigate('https://catalog.onliner.by/mobile')
     catalogItemsPage.openFirstItemPage();
     productPage.addProductToCart();
     productPage.cartSidebarHeader.should('contain', 'Товар добавлен в корзину');
   });
 
-  it('Cart should be opened with item list after adding items to cart', () => {
+  it('Cart page should be opened with item list after adding items to cart', () => {
     productPage.goToCartFromSidebar();
     cartPage.cartItemsList.should('exist');
   });
 
-  it('Deleting items from cart should return cart without item list', () => {
+  it('Deleting items from cart should return cart page without item list', () => {
     cartPage.removeItemFromCart();
     cartPage.cartItemsList.should('not.exist');
+  });
+
+  it('Click on catalog button on cart page should open catalog page with "Каталог" title', () => {
+    cartPage.goToCatalogPage();
+    catalogNavPage.catalogNavTitle.should('contain', 'Каталог');
   });
 
 });
