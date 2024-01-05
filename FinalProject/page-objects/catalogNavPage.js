@@ -17,6 +17,14 @@ class CatalogNavPage extends Base {
     return cy.get('div.catalog-navigation-list__category[data-id="1"] div.catalog-navigation-list__aside-item a').first();
   }
 
+  get catalogNavTitle() {
+    return cy.get('div.catalog-navigation > div.catalog-navigation__title');
+  }
+
+  get catalogNavList() {
+    return cy.get('div.catalog-navigation-list_opened');
+  }
+
   goToSmartphones() {
     this.electronicsBlockButton.click();
     this.mobilesBlockButton.click();
