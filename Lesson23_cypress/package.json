@@ -1,0 +1,16 @@
+{
+  "name": "final-project_mihalchenko",
+  "version": "1.0.0",
+  "description": "sila.by website testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx cypress open"
+  },
+  "author": "mihalchenko",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.3.10",
+    "cypress": "13.6.0",
+    "cypress-real-events": "^1.11.0"
+  }
+}
