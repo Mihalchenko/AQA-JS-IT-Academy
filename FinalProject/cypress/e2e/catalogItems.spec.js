@@ -4,11 +4,13 @@ import catalogItemsPage from '../../page-objects/catalogItemsPage.js';
 describe('Onliner website catalog items testing', () => {
 
   it('Sort catalog items by price increase should work', () => {
-    const sortBy = 'min';
     homePage.navigate('https://catalog.onliner.by/notebook');
-    const startItemList = catalogItemsPage.itemsList();
+    const sortBy = 'min';
     catalogItemsPage.sortItemsBy(sortBy);
-    cy.log('test', startItemList);
+    cy.wait(2500);
+    catalogItemsPage.arrayCompare(sortBy).should('be.true');
+    
+    // test.should('be.true');
   });
 
 });

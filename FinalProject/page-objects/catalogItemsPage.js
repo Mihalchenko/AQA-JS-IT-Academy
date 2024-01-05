@@ -21,14 +21,6 @@ class CatalogItemsPage extends Base {
     return cy.get('div#schema-order');
   }
 
-  itemsList() {
-    let arr = [];
-    this.itemsListPrices.each(el => {
-      arr.push(parseFloat(el.text().replace(',', '.')))
-    });
-    return arr;
-  }
-
   sortItemsBy(sortBy) {
     this.sortButton.click();
 
@@ -37,6 +29,21 @@ class CatalogItemsPage extends Base {
     } else if (sortBy === "max") {
       cy.xpath('//div[@id="schema-order"]//span[text()="Дорогие"]').click();
     }
+  }
+
+  itemsList() {
+    let arr = [];
+    this.itemsListPrices.each(el => {
+      arr.push(parseFloat(el.text().replace(/[\s,]/g, m => (m == ',') ? '.' : '')))
+    });
+    return arr;
+  }
+
+  arrayCompare(sortBy) {
+    let currentArray = this.itemsList();
+
+    return true;
+
   }
 
 }
