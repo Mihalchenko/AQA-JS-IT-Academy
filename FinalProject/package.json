@@ -1,7 +1,7 @@
 {
   "name": "final-project_mihalchenko",
   "version": "1.0.0",
-  "description": "sila.by website testing",
+  "description": "onliner.by website testing",
   "main": "index.js",
   "scripts": {
     "test": "npx cypress open",
