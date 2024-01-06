@@ -13,9 +13,21 @@ class CatalogItemsPage extends Base {
     return cy.get('h1.schema-header__title');
   };
 
-  get itemsListPrices() {
+  get newItemsListPrices() {
     return cy.xpath('//a[contains(@class, "schema-product__price-value") and not(contains(@class, "schema-product__price-value_secondary"))]//span[last()]');
   };
+
+  get usedItemsListPrices() {
+    return cy.get('a.schema-product__button');
+  }
+
+  openUsedItemsList() {
+    cy.xpath('//div[@class="schema-filter__group"]//span[text()="Объявления"]').click();
+  }
+
+  get usedItemsList() {
+    return cy.get('div#schema-second-offers');
+  }
 
   get sortButton() {
     return cy.get('div#schema-order');
@@ -32,16 +44,16 @@ class CatalogItemsPage extends Base {
   };
   
   waitForListItemsUpdate() {
-    cy.wait(1000); // пробовал по разному дожидаться с плагином waitUntil для cypress, но не сработало
+    // cy.wait(1200); // пробовал по разному дожидаться с плагином waitUntil для cypress, но не сработало
   };
 
-  isItemsSorted(sortBy) {
+  isItemsSorted(sortBy, condition) {
     this.waitForListItemsUpdate();
 
     let prev;
     let result = true;
 
-    this.itemsListPrices.each((el) => {
+    (condition == "new" && this.newItemsListPrices || condition == "used" && this.usedItemsListPrices).each((el) => {
       let currentEl = parseFloat(el[0].innerText.replace(/[\s,]/g, m => (m == ',') ? '.' : ''));
       
       if (sortBy === "min") {
