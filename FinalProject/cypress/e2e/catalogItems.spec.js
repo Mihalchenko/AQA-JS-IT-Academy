@@ -7,14 +7,12 @@ describe('Onliner website catalog items testing', () => {
     homePage.navigate('https://catalog.onliner.by/notebook');
     const sortBy = 'min';
     catalogItemsPage.sortItemsBy(sortBy);
-    cy.wait(2500);
-    catalogItemsPage.isArraySorted(sortBy);
+    catalogItemsPage.isItemsSorted(sortBy);
   });
 
   it('Sort catalog items by price decrease should work', () => {
     const sortBy = 'max';
     catalogItemsPage.sortItemsBy(sortBy);
-    cy.wait(2500);
-    catalogItemsPage.isArraySorted(sortBy);
+    catalogItemsPage.isItemsSorted(sortBy);
   });
 });

@@ -3,23 +3,23 @@ import { Base } from './base.js';
 class CatalogItemsPage extends Base {
   constructor() {
     super()
-  }
+  };
 
   openFirstItemPage() {
     cy.get('a.js-product-title-link').first().click();
-  }
+  };
 
   get mainTitle() {
     return cy.get('h1.schema-header__title');
-  }
+  };
 
   get itemsListPrices() {
     return cy.xpath('//a[contains(@class, "schema-product__price-value") and not(contains(@class, "schema-product__price-value_secondary"))]//span[last()]');
-  }
+  };
 
   get sortButton() {
     return cy.get('div#schema-order');
-  }
+  };
 
   sortItemsBy(sortBy) {
     this.sortButton.click();
@@ -28,10 +28,16 @@ class CatalogItemsPage extends Base {
       cy.xpath('//div[@id="schema-order"]//span[text()="Дешевые"]').click();
     } else if (sortBy === "max") {
       cy.xpath('//div[@id="schema-order"]//span[text()="Дорогие"]').click();
-    }
-  }
+    };
+  };
+  
+  waitForListItemsUpdate() {
+    cy.wait(1000); // пробовал по разному дожидаться с плагином waitUntil для cypress, но не сработало
+  };
 
-  isArraySorted(sortBy) {
+  isItemsSorted(sortBy) {
+    this.waitForListItemsUpdate();
+
     let prev;
     let result = true;
 
