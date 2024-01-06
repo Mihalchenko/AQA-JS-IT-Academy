@@ -43,12 +43,16 @@ class CatalogItemsPage extends Base {
     };
   };
   
-  waitForListItemsUpdate() {
-    cy.wait(1200); // пробовал по разному дожидаться с плагином waitUntil для cypress, но не сработало
+  waitForListItemsUpdate(sortBy, condition) {
+    cy.intercept({
+      method: 'GET',
+      url: `https://catalog.onliner.by/sdapi/catalog.api/search/notebook${condition == "used" && '/second-offers?segment=second&' || condition == "new" && '?'}order=price:${sortBy}`,
+    }).as('apiCheck');
+    cy.wait('@apiCheck');
   };
 
   isItemsSorted(sortBy, condition) {
-    this.waitForListItemsUpdate();
+    this.waitForListItemsUpdate(sortBy, condition);
 
     let prev;
     let result = true;
