@@ -1,0 +1,183 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Generated schema for Root",
+  "type": "object",
+  "properties": {
+    "offers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "id": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "type",
+              "id"
+            ]
+          },
+          "product": {
+            "type": "object",
+            "properties": {
+              "full_name": {
+                "type": "string"
+              },
+              "icon": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "full_name",
+              "icon"
+            ]
+          },
+          "location": {
+            "type": "object",
+            "properties": {
+              "address_string": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "address_string"
+            ]
+          },
+          "condition": {
+            "type": "number"
+          },
+          "price": {
+            "type": "object",
+            "properties": {
+              "amount": {
+                "type": "string"
+              },
+              "currency": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "amount",
+              "currency"
+            ]
+          },
+          "belpost_ems_delivery": {
+            "type": "object",
+            "properties": {
+              "is_available": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "is_available"
+            ]
+          },
+          "delivery": {
+            "type": "object",
+            "properties": {
+              "available_for_country": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "available_for_country"
+            ]
+          },
+          "photos": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "mobile_list": {
+                  "type": "string"
+                },
+                "x80": {
+                  "type": "string"
+                },
+                "1280x1280": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "mobile_list",
+                "x80",
+                "1280x1280"
+              ]
+            }
+          },
+          "description": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          },
+          "last_up_at": {
+            "type": "string"
+          },
+          "html_url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "user",
+          "product",
+          "location",
+          "condition",
+          "price",
+          "belpost_ems_delivery",
+          "delivery",
+          "photos",
+          "description",
+          "created_at",
+          "updated_at",
+          "last_up_at",
+          "html_url"
+        ]
+      }
+    },
+    "total": {
+      "type": "number"
+    },
+    "page": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": "number"
+        },
+        "items": {
+          "type": "number"
+        },
+        "current": {
+          "type": "number"
+        },
+        "last": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "limit",
+        "items",
+        "current",
+        "last"
+      ]
+    }
+  },
+  "required": [
+    "offers",
+    "total",
+    "page"
+  ]
+}
