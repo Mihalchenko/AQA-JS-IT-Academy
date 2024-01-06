@@ -4,7 +4,8 @@
   "description": "sila.by website testing",
   "main": "index.js",
   "scripts": {
-    "test": "npx cypress open"
+    "test": "npx cypress open",
+    "lint": "eslint ."
   },
   "author": "mihalchenko",
   "license": "ISC",
@@ -15,5 +16,8 @@
     "cypress-plugin-api": "^2.11.1",
     "cypress-real-events": "^1.11.0",
     "cypress-xpath": "^2.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0"
   }
 }

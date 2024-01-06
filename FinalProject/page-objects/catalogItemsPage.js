@@ -3,51 +3,51 @@ import { Base } from './base.js';
 class CatalogItemsPage extends Base {
   constructor() {
     super()
-  };
+  }
 
   openFirstItemPage() {
     cy.get('a.js-product-title-link').first().click();
-  };
+  }
 
   get mainTitle() {
     return cy.get('h1.schema-header__title');
-  };
+  }
 
   get newItemsListPrices() {
     return cy.xpath('//a[contains(@class, "schema-product__price-value") and not(contains(@class, "schema-product__price-value_secondary"))]//span[last()]');
-  };
+  }
 
   get usedItemsListPrices() {
     return cy.get('a.schema-product__button');
-  };
+  }
 
   get itemListNames() {
     return cy.get('div.schema-product__title');
-  };
+  }
 
   showAllItemListNames() {
     cy.xpath('//div[@class="schema-filter__label"]//span[text()="Производитель"]/ancestor::div[@class="schema-filter__fieldset"]//div[@class="schema-filter-control__item"]').click();
-  };
+  }
 
   checkItemByName(name) {
     cy.xpath(`//div[@class="schema-filter__label"]//span[text()="Производитель"]/ancestor::div[@class="schema-filter__fieldset"]//div[@class="schema-filter-popover__inner"]//input[@value="${name}"]/ancestor::label`).click();
-  };
+  }
 
   get filteredItemsName() {
     return cy.get('div.schema-product__title');
-  };
+  }
 
   openUsedItemsList() {
     cy.xpath('//div[@class="schema-filter__group"]//span[text()="Объявления"]').click();
-  };
+  }
 
   get usedItemsList() {
     return cy.get('div#schema-second-offers');
-  };
+  }
 
   get sortButton() {
     return cy.get('div#schema-order');
-  };
+  }
 
   sortItemsByPrice(sortBy) {
     this.sortButton.click();
@@ -56,8 +56,8 @@ class CatalogItemsPage extends Base {
       cy.xpath('//div[@id="schema-order"]//span[text()="Дешевые"]').click();
     } else if (sortBy === "desc") {
       cy.xpath('//div[@id="schema-order"]//span[text()="Дорогие"]').click();
-    };
-  };
+    }
+  }
   
   waitForListItemsUpdate(sortBy, condition, type) {
     if (type == "sort") {
@@ -73,7 +73,7 @@ class CatalogItemsPage extends Base {
       }).as('apiFilterCheck');
       cy.wait('@apiFilterCheck');
     }
-  };
+  }
 
   isItemsSorted(sortBy, condition) {
     this.waitForListItemsUpdate(sortBy, condition, "sort");
@@ -99,7 +99,7 @@ class CatalogItemsPage extends Base {
     cy.then(() => {
       expect(result).to.be.true;
     });
-  };
+  }
 
   filterItemsByName(name) {
     this.showAllItemListNames();
@@ -114,13 +114,13 @@ class CatalogItemsPage extends Base {
     this.filteredItemsName.each((el) => {
       if((el[0].innerText.toLowerCase()).includes(name.toLowerCase()) === false) {
         result = false;
-      };
+      }
     });
 
     cy.then(() => {
       expect(result).to.be.true;
     })
-  };
+  }
 }
 
 export default new CatalogItemsPage();
