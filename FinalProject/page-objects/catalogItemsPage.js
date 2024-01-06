@@ -31,21 +31,29 @@ class CatalogItemsPage extends Base {
     }
   }
 
-  itemsList() {
-    let arr = [];
-    this.itemsListPrices.each(el => {
-      arr.push(parseFloat(el.text().replace(/[\s,]/g, m => (m == ',') ? '.' : '')))
+  isArraySorted(sortBy) {
+    let prev;
+    let result = true;
+
+    this.itemsListPrices.each((el) => {
+      let currentEl = parseFloat(el[0].innerText.replace(/[\s,]/g, m => (m == ',') ? '.' : ''));
+      
+      if (sortBy === "min") {
+        if(currentEl < prev) {
+          result = false;
+        }
+      } else if (sortBy === "max") {
+        if(currentEl > prev) {
+          result = false;
+        }
+      }
+      prev = currentEl;
     });
-    return arr;
-  }
 
-  arrayCompare(sortBy) {
-    let currentArray = this.itemsList();
-
-    return true;
-
-  }
-
+    cy.then(() => {
+      expect(result).to.be.true;
+    });
+  };
 }
 
 export default new CatalogItemsPage();

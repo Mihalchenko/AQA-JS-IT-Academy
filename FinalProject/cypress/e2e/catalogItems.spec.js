@@ -8,9 +8,13 @@ describe('Onliner website catalog items testing', () => {
     const sortBy = 'min';
     catalogItemsPage.sortItemsBy(sortBy);
     cy.wait(2500);
-    catalogItemsPage.arrayCompare(sortBy).should('be.true');
-    
-    // test.should('be.true');
+    catalogItemsPage.isArraySorted(sortBy);
   });
 
+  it('Sort catalog items by price decrease should work', () => {
+    const sortBy = 'max';
+    catalogItemsPage.sortItemsBy(sortBy);
+    cy.wait(2500);
+    catalogItemsPage.isArraySorted(sortBy);
+  });
 });
