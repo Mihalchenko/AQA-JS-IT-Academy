@@ -5,13 +5,13 @@ describe('Onliner website catalog items sort testing', () => {
 
   it('Sort catalog items(new) by price increase should work', () => {
     homePage.navigate('https://catalog.onliner.by/notebook');
-    const sortBy = 'min';
+    const sortBy = 'asc';
     catalogItemsPage.sortItemsBy(sortBy);
     catalogItemsPage.isItemsSorted(sortBy, "new");
   });
 
   it('Sort catalog items(new) by price decrease should work', () => {
-    const sortBy = 'max';
+    const sortBy = 'desc';
     catalogItemsPage.sortItemsBy(sortBy);
     catalogItemsPage.isItemsSorted(sortBy, "new");
   });
@@ -22,13 +22,13 @@ describe('Onliner website catalog items sort testing', () => {
   })
 
   it('Sort catalog items(used) by price increase should work', () => {
-    const sortBy = 'min';
+    const sortBy = 'asc';
     catalogItemsPage.sortItemsBy(sortBy);
     catalogItemsPage.isItemsSorted(sortBy, "used");
   });
 
   it('Sort catalog items(used) by price decrease should work', () => {
-    const sortBy = 'max';
+    const sortBy = 'desc';
     catalogItemsPage.sortItemsBy(sortBy);
     catalogItemsPage.isItemsSorted(sortBy, "used");
   });

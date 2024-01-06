@@ -36,15 +36,15 @@ class CatalogItemsPage extends Base {
   sortItemsBy(sortBy) {
     this.sortButton.click();
 
-    if (sortBy === "min") {
+    if (sortBy === "asc") {
       cy.xpath('//div[@id="schema-order"]//span[text()="Дешевые"]').click();
-    } else if (sortBy === "max") {
+    } else if (sortBy === "desc") {
       cy.xpath('//div[@id="schema-order"]//span[text()="Дорогие"]').click();
     };
   };
   
   waitForListItemsUpdate() {
-    // cy.wait(1200); // пробовал по разному дожидаться с плагином waitUntil для cypress, но не сработало
+    cy.wait(1200); // пробовал по разному дожидаться с плагином waitUntil для cypress, но не сработало
   };
 
   isItemsSorted(sortBy, condition) {
@@ -56,11 +56,11 @@ class CatalogItemsPage extends Base {
     (condition == "new" && this.newItemsListPrices || condition == "used" && this.usedItemsListPrices).each((el) => {
       let currentEl = parseFloat(el[0].innerText.replace(/[\s,]/g, m => (m == ',') ? '.' : ''));
       
-      if (sortBy === "min") {
+      if (sortBy === "asc") {
         if(currentEl < prev) {
           result = false;
         }
-      } else if (sortBy === "max") {
+      } else if (sortBy === "desc") {
         if(currentEl > prev) {
           result = false;
         }
