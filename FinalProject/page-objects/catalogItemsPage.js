@@ -19,21 +19,37 @@ class CatalogItemsPage extends Base {
 
   get usedItemsListPrices() {
     return cy.get('a.schema-product__button');
-  }
+  };
+
+  get itemListNames() {
+    return cy.get('div.schema-product__title');
+  };
+
+  showAllItemListNames() {
+    cy.xpath('//div[@class="schema-filter__label"]//span[text()="Производитель"]/ancestor::div[@class="schema-filter__fieldset"]//div[@class="schema-filter-control__item"]').click();
+  };
+
+  checkItemByName(name) {
+    cy.xpath(`//div[@class="schema-filter__label"]//span[text()="Производитель"]/ancestor::div[@class="schema-filter__fieldset"]//div[@class="schema-filter-popover__inner"]//input[@value="${name}"]/ancestor::label`).click();
+  };
+
+  get filteredItemsName() {
+    return cy.get('div.schema-product__title');
+  };
 
   openUsedItemsList() {
     cy.xpath('//div[@class="schema-filter__group"]//span[text()="Объявления"]').click();
-  }
+  };
 
   get usedItemsList() {
     return cy.get('div#schema-second-offers');
-  }
+  };
 
   get sortButton() {
     return cy.get('div#schema-order');
   };
 
-  sortItemsBy(sortBy) {
+  sortItemsByPrice(sortBy) {
     this.sortButton.click();
 
     if (sortBy === "asc") {
@@ -43,16 +59,24 @@ class CatalogItemsPage extends Base {
     };
   };
   
-  waitForListItemsUpdate(sortBy, condition) {
-    cy.intercept({
-      method: 'GET',
-      url: `https://catalog.onliner.by/sdapi/catalog.api/search/notebook${condition == "used" && '/second-offers?segment=second&' || condition == "new" && '?'}order=price:${sortBy}`,
-    }).as('apiCheck');
-    cy.wait('@apiCheck');
+  waitForListItemsUpdate(sortBy, condition, type) {
+    if (type == "sort") {
+      cy.intercept({
+        method: 'GET',
+        url: `https://catalog.onliner.by/sdapi/catalog.api/search/notebook${condition == "used" && '/second-offers?segment=second&' || condition == "new" && '?'}order=price:${sortBy}`,
+      }).as('apiSortCheck');
+      cy.wait('@apiSortCheck');
+    } else if (type == "filter") {
+      cy.intercept({
+        method: 'GET',
+        url: `https://catalog.onliner.by/sdapi/catalog.api/search/notebook/second-offers?mfr[0]=${sortBy.toLowerCase()}&segment=second&order=price:desc`,
+      }).as('apiFilterCheck');
+      cy.wait('@apiFilterCheck');
+    }
   };
 
   isItemsSorted(sortBy, condition) {
-    this.waitForListItemsUpdate(sortBy, condition);
+    this.waitForListItemsUpdate(sortBy, condition, "sort");
 
     let prev;
     let result = true;
@@ -75,6 +99,27 @@ class CatalogItemsPage extends Base {
     cy.then(() => {
       expect(result).to.be.true;
     });
+  };
+
+  filterItemsByName(name) {
+    this.showAllItemListNames();
+    this.checkItemByName(name.toLowerCase());
+  }
+
+  isItemsFiltered(name) {
+    this.waitForListItemsUpdate(name, null, "filter");
+
+    let result = true;
+
+    this.filteredItemsName.each((el) => {
+      if((el[0].innerText.toLowerCase()).includes(name.toLowerCase()) === false) {
+        result = false;
+      };
+    });
+
+    cy.then(() => {
+      expect(result).to.be.true;
+    })
   };
 }
 
