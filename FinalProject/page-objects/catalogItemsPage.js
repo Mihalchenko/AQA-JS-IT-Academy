@@ -21,10 +21,6 @@ class CatalogItemsPage extends Base {
     return cy.get('a.schema-product__button');
   }
 
-  get itemListNames() {
-    return cy.get('div.schema-product__title');
-  }
-
   showAllItemListNames() {
     cy.xpath('//div[@class="schema-filter__label"]//span[text()="Производитель"]/ancestor::div[@class="schema-filter__fieldset"]//div[@class="schema-filter-control__item"]').click();
   }
@@ -33,7 +29,7 @@ class CatalogItemsPage extends Base {
     cy.xpath(`//div[@class="schema-filter__label"]//span[text()="Производитель"]/ancestor::div[@class="schema-filter__fieldset"]//div[@class="schema-filter-popover__inner"]//input[@value="${name}"]/ancestor::label`).click();
   }
 
-  get filteredItemsName() {
+  get itemListNames() {
     return cy.get('div.schema-product__title');
   }
 
@@ -111,7 +107,7 @@ class CatalogItemsPage extends Base {
 
     let result = true;
 
-    this.filteredItemsName.each((el) => {
+    this.itemListNames.each((el) => {
       if((el[0].innerText.toLowerCase()).includes(name.toLowerCase()) === false) {
         result = false;
       }
@@ -119,7 +115,23 @@ class CatalogItemsPage extends Base {
 
     cy.then(() => {
       expect(result).to.be.true;
-    })
+    });
+  }
+
+  get addItemToCompareButtons() {
+    return cy.get('label.schema-product__control');
+  }
+
+  addItemsToCompare(amount) {
+    this.addItemToCompareButtons.each((el, index) => {
+      if(index < amount) {
+        el[0].click();
+      }
+    });
+  }
+
+  get compareButton() {
+    return cy.get('div.compare-button_visible div.compare-button__inner');
   }
 }
 

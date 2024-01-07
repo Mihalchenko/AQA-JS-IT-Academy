@@ -27,7 +27,8 @@ module.exports = {
         "expect": true,
         "chai": true,
         "describe": true,
-        "it": true
+        "it": true,
+        "before": true
     },
     "rules": {
         'no-restricted-syntax': 0,
