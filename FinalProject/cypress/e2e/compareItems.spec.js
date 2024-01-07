@@ -29,4 +29,9 @@ describe('Onliner compare catalog items tests', () => {
     compareItemsPage.leaveOneItemInCompare();
     compareItemsPage.deleteItemsFromCompareButtons.should('not.exist');
   });
+
+  it('Click on "Очистить сравнение" button should redirect to catalog main page', () => {
+    compareItemsPage.clearCompareButton.click();
+    cy.url().should('be.equal', 'https://catalog.onliner.by/');
+  });
 });

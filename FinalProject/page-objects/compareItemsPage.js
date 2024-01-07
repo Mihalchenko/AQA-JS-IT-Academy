@@ -17,6 +17,10 @@ class CompareItemsPage extends Base {
     return cy.get('tr.product-table__row_top a.product-icon_trash');
   }
 
+  get clearCompareButton() {
+    return cy.get('div.catalog-top a.product-table__clear');
+  }
+
   deleteOneItemFromCompare() {
     this.deleteItemsFromCompareButtons.first().click();
   }
