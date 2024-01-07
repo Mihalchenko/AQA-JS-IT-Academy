@@ -16,9 +16,17 @@ describe('Onliner website catalog navigation testing', () => {
     catalogNavPage.catalogNavList.should('exist');
   });
 
+  it('Alternative nav menu should bot be visible while navigation list is opened', () => {
+    catalogNavPage.alternativeNavMenu.should('not.be.visible');
+  });
+
   it('Click on opened category should close navigation list', () => {
     catalogNavPage.electronicsBlockButton.click();
     catalogNavPage.catalogNavList.should('not.exist');
+  });
+
+  it('Alternative nav menu should be visible when navigation list is closed', () => {
+    catalogNavPage.alternativeNavMenu.should('be.visible');
   });
 
   it('Click on mobile phones should return page with title "Мобильные телефоны"', () => {

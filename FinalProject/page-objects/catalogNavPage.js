@@ -25,6 +25,10 @@ class CatalogNavPage extends Base {
     return cy.get('div.catalog-navigation-list_opened');
   }
 
+  get alternativeNavMenu() {
+    return cy.get('ul.catalog-bar__list');
+  }
+
   goToSmartphones() {
     this.electronicsBlockButton.click();
     this.mobilesBlockButton.click();
