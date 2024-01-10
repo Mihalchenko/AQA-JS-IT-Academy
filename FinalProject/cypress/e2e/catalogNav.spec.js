@@ -12,7 +12,7 @@ describe('Onliner website catalog navigation testing', () => {
   });
 
   it('Click on any category should open navigation list', () => {
-    catalogNavPage.electronicsBlockButton.click();
+    catalogNavPage.click(catalogNavPage.electronicsBlockButton);
     catalogNavPage.catalogNavList.should('exist');
   });
 
@@ -21,7 +21,7 @@ describe('Onliner website catalog navigation testing', () => {
   });
 
   it('Click on opened category should close navigation list', () => {
-    catalogNavPage.electronicsBlockButton.click();
+    catalogNavPage.click(catalogNavPage.electronicsBlockButton);
     catalogNavPage.catalogNavList.should('not.exist');
   });
 

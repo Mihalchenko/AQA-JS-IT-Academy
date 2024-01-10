@@ -16,7 +16,7 @@ describe('Onliner compare catalog items tests', () => {
   });
 
   it('Click on compare button should open compare page with "Cравнение товаров" title', () => {
-    catalogItemsPage.compareButton.click();
+    catalogItemsPage.click(catalogItemsPage.compareButton);
     compareItemsPage.pageMainTitle.should('contain', 'Сравнение товаров');
   });
 
@@ -31,7 +31,7 @@ describe('Onliner compare catalog items tests', () => {
   });
 
   it('Click on "Очистить сравнение" button should redirect to catalog main page', () => {
-    compareItemsPage.clearCompareButton.click();
+    compareItemsPage.click(compareItemsPage.clearCompareButton);
     cy.url().should('be.equal', 'https://catalog.onliner.by/');
   });
 });
