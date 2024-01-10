@@ -5,10 +5,6 @@ class CatalogItemsPage extends Base {
     super()
   }
 
-  openFirstItemPage() {
-    cy.get('a.js-product-title-link').first().click();
-  }
-
   get mainTitle() {
     return cy.get('h1.schema-header__title');
   }
@@ -21,20 +17,8 @@ class CatalogItemsPage extends Base {
     return cy.get('a.schema-product__button');
   }
 
-  showAllItemListNames() {
-    cy.xpath('//div[@class="schema-filter__label"]//span[text()="Производитель"]/ancestor::div[@class="schema-filter__fieldset"]//div[@class="schema-filter-control__item"]').click();
-  }
-
-  checkItemByName(name) {
-    cy.xpath(`//div[@class="schema-filter__label"]//span[text()="Производитель"]/ancestor::div[@class="schema-filter__fieldset"]//div[@class="schema-filter-popover__inner"]//input[@value="${name}"]/ancestor::label`).click();
-  }
-
   get itemListNames() {
     return cy.get('div.schema-product__title');
-  }
-
-  openUsedItemsList() {
-    cy.xpath('//div[@class="schema-filter__group"]//span[text()="Объявления"]').click();
   }
 
   get usedItemsList() {
@@ -43,6 +27,26 @@ class CatalogItemsPage extends Base {
 
   get sortButton() {
     return cy.get('div#schema-order');
+  }
+
+  get compareButton() {
+    return cy.get('div.compare-button_visible div.compare-button__inner');
+  }
+
+  openFirstItemPage() {
+    cy.get('a.js-product-title-link').first().click();
+  }
+
+  showAllItemListNames() {
+    cy.xpath('//div[@class="schema-filter__label"]//span[text()="Производитель"]/ancestor::div[@class="schema-filter__fieldset"]//div[@class="schema-filter-control__item"]').click();
+  }
+
+  checkItemByName(name) {
+    cy.xpath(`//div[@class="schema-filter__label"]//span[text()="Производитель"]/ancestor::div[@class="schema-filter__fieldset"]//div[@class="schema-filter-popover__inner"]//input[@value="${name}"]/ancestor::label`).click();
+  }
+
+  openUsedItemsList() {
+    cy.xpath('//div[@class="schema-filter__group"]//span[text()="Объявления"]').click();
   }
 
   sortItemsByPrice(sortBy) {
@@ -128,10 +132,6 @@ class CatalogItemsPage extends Base {
         el[0].click();
       }
     });
-  }
-
-  get compareButton() {
-    return cy.get('div.compare-button_visible div.compare-button__inner');
   }
 }
 

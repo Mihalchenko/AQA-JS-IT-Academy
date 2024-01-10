@@ -1,19 +1,18 @@
 import homePage from '../../page-objects/homePage.js';
 import catalogItemsPage from '../../page-objects/catalogItemsPage.js';
+import { sortBy, condition } from '../../helpers/constans.js';
 
 describe('Onliner website catalog items sort testing', () => {
 
   it('Sort catalog items(new) by price increase should return items sorted by price increase', () => {
     homePage.navigate('https://catalog.onliner.by/notebook');
-    const sortBy = 'asc';
-    catalogItemsPage.sortItemsByPrice(sortBy);
-    catalogItemsPage.isItemsSorted(sortBy, "new");
+    catalogItemsPage.sortItemsByPrice(sortBy.priceAsc);
+    catalogItemsPage.isItemsSorted(sortBy.priceAsc, condition.new);
   });
 
   it('Sort catalog items(new) by price decrease should return items sorted by price decrease', () => {
-    const sortBy = 'desc';
-    catalogItemsPage.sortItemsByPrice(sortBy);
-    catalogItemsPage.isItemsSorted(sortBy, "new");
+    catalogItemsPage.sortItemsByPrice(sortBy.priceDesc);
+    catalogItemsPage.isItemsSorted(sortBy.priceDesc, condition.new);
   });
 
   it('Click on "Объявления" should open item list with used items', () => {
@@ -23,14 +22,13 @@ describe('Onliner website catalog items sort testing', () => {
 
   it('Sort catalog items(used) by price increase should return items sorted by price increase', () => {
     const sortBy = 'asc';
-    catalogItemsPage.sortItemsByPrice(sortBy);
-    catalogItemsPage.isItemsSorted(sortBy, "used");
+    catalogItemsPage.sortItemsByPrice(sortBy.priceAsc);
+    catalogItemsPage.isItemsSorted(sortBy.priceAsc, condition.used);
   });
 
   it('Sort catalog items(used) by price decrease should return items sorted by price decrease', () => {
-    const sortBy = 'desc';
-    catalogItemsPage.sortItemsByPrice(sortBy);
-    catalogItemsPage.isItemsSorted(sortBy, "used");
+    catalogItemsPage.sortItemsByPrice(sortBy.priceDesc);
+    catalogItemsPage.isItemsSorted(sortBy.priceDesc, condition.used);
   });
 
   it('Filter by name should return items filtered by name', () => {

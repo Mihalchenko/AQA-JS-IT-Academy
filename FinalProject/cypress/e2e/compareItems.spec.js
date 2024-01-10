@@ -1,17 +1,17 @@
 import homePage from '../../page-objects/homePage.js';
 import catalogItemsPage from '../../page-objects/catalogItemsPage.js';
 import compareItemsPage from '../../page-objects/compareItemsPage.js';
+import { numberOfItemsForCompare } from '../../helpers/constans.js';
 
 describe('Onliner compare catalog items tests', () => {
 
   before(() => {
     cy.clearCookie("compare");
   });
-  let numberForCompare = 4;
 
   it('Add items to compare should show compare button', () => {
     homePage.navigate('https://catalog.onliner.by/notebook');
-    catalogItemsPage.addItemsToCompare(numberForCompare);
+    catalogItemsPage.addItemsToCompare(numberOfItemsForCompare);
     catalogItemsPage.compareButton.should('exist');
   });
 
@@ -20,9 +20,9 @@ describe('Onliner compare catalog items tests', () => {
     compareItemsPage.pageMainTitle.should('contain', 'Сравнение товаров');
   });
 
-  it(`Deleting one of items from compare should return ${numberForCompare-1} items`, () => {
+  it(`Deleting one of items from compare should return ${numberOfItemsForCompare-1} items`, () => {
     compareItemsPage.deleteOneItemFromCompare();
-    compareItemsPage.itemsInCompare.should('have.lengthOf', numberForCompare-1);
+    compareItemsPage.itemsInCompare.should('have.lengthOf', numberOfItemsForCompare-1);
   });
 
   it(`Deleting all exept one of items from compare should exclude delete item button`, () => {
