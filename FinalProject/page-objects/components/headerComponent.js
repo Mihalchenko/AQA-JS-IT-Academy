@@ -5,13 +5,14 @@ class HeaderComponent extends Base {
     super()
   }
 
-  goToCartPage() {
-    cy.get('a.auth-bar__item--cart').click();
+  get cartPageIcon() {
+    return cy.get('a.auth-bar__item--cart');
   }
 
-  goToCatalogPage() {
-    cy.get('ul.b-main-navigation a[href="https://catalog.onliner.by"]').click();
+  get catalogPageLink() {
+    return cy.get('ul.b-main-navigation a[href="https://catalog.onliner.by"]');
   }
+
 }
 
 export default new HeaderComponent();

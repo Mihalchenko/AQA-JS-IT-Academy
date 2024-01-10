@@ -22,7 +22,7 @@ class CompareItemsPage extends Base {
   }
 
   deleteOneItemFromCompare() {
-    this.deleteItemsFromCompareButtons.first().click();
+    this.click(this.deleteItemsFromCompareButtons.first());
   }
 
   leaveOneItemInCompare() {

@@ -30,9 +30,9 @@ class CatalogNavPage extends Base {
   }
 
   goToSmartphones() {
-    this.electronicsBlockButton.click();
-    this.mobilesBlockButton.click();
-    this.smartphonesButton.click();
+    this.click(this.electronicsBlockButton);
+    this.click(this.mobilesBlockButton);
+    this.click(this.smartphonesButton);
   }
 }
 

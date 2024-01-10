@@ -1,0 +1,1 @@
+// Cypress.Commands.add('name', (arg1, arg2) => { ... })

@@ -7,7 +7,7 @@ describe('Onliner website catalog navigation testing', () => {
 
   it('Catalog page should be opened with "Каталог" title', () => {
     homePage.navigate('https://www.onliner.by/');
-    headerComponent.goToCatalogPage();
+    headerComponent.click(headerComponent.catalogPageLink);
     catalogNavPage.catalogNavTitle.should('contain', 'Каталог');
   });
 

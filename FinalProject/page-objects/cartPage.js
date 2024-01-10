@@ -6,16 +6,25 @@ class CartPage extends Base {
   }
 
   get cartItemsList() {
-    return cy.get('.cart-form__offers');
+    return cy.get('div.cart-form__offers');
+  }
+
+  get cartPageDeleteItemButton() {
+    return cy.get('a.cart-form__button_remove');
+  }
+
+  get cartPageClostItemButton() {
+    return cy.xpath('//a[contains(@class, "cart-form__link_other") and text()="Закрыть"]');
+  }
+
+  get catalogPageLink() {
+    return cy.get(`.cart-message__description a[href='https://catalog.onliner.by']`);
   }
 
   removeItemFromCart() {
-    cy.get('a.cart-form__button_remove').realHover('mouse').click();
-    cy.get('a.cart-form__link_other').eq(1).click();
-  }
-
-  goToCatalogPage() {
-    cy.get(`.cart-message__description a[href='https://catalog.onliner.by']`).click();
+    this.cartPageDeleteItemButton.realHover('mouse');
+    this.click(this.cartPageDeleteItemButton);
+    this.click(this.cartPageClostItemButton);
   }
 }
 

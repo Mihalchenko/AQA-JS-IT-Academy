@@ -5,16 +5,16 @@ class ProductPage extends Base {
     super()
   }
 
-  addProductToCart() {
-    cy.get('a.product-aside__button_cart').first().click();
+  get addProductToCartButton() {
+    return cy.get('a.product-aside__button_cart').first();
   }
   
   get cartSidebarHeader() {
     return cy.get('div.product-recommended__subheader').first();
   }
 
-  goToCartFromSidebar() {
-    cy.get('div.product-recommended__control_checkout a[href="https://cart.onliner.by"]').click();
+  get goToCartSidebarButton() {
+    return cy.get('div.product-recommended__control_checkout a[href="https://cart.onliner.by"]');
   }
 
 }
