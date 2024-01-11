@@ -16,12 +16,11 @@ describe('Onliner website catalog items sort testing', () => {
   });
 
   it('Click on "Объявления" should open item list with used items', () => {
-    catalogItemsPage.openUsedItemsList();
+    catalogItemsPage.click(catalogItemsPage.usedItemListPageLink);
     catalogItemsPage.usedItemsList.should('be.visible');
   })
 
   it('Sort catalog items(used) by price increase should return items sorted by price increase', () => {
-    const sortBy = 'asc';
     catalogItemsPage.sortItemsByPrice(sortBy.priceAsc);
     catalogItemsPage.isItemsSorted(sortBy.priceAsc, condition.used);
   });

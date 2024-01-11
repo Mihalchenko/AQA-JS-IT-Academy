@@ -15,7 +15,7 @@ describe('Onliner website cart testing', () => {
 
   it('Add product to cart from product page should show sidebar with text "Товар добавлен в корзину"', () => {
     homePage.navigate('https://catalog.onliner.by/mobile')
-    catalogItemsPage.openFirstItemPage();
+    catalogItemsPage.click(catalogItemsPage.firstItemPageLink);
     productPage.click(productPage.addProductToCartButton);
     productPage.cartSidebarHeader.should('contain', 'Товар добавлен в корзину');
   });
