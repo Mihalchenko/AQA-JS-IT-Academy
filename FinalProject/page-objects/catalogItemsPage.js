@@ -41,21 +41,21 @@ class CatalogItemsPage extends Base {
     return cy.xpath('//div[@class="schema-filter__group"]//span[text()="Объявления"]');
   }
 
-  showAllItemListNames() {
-    cy.xpath('//div[@class="schema-filter__label"]//span[text()="Производитель"]/ancestor::div[@class="schema-filter__fieldset"]//div[@class="schema-filter-control__item"]').click();
+  get allItemsListNamesFilter() {
+    return cy.xpath('//div[@class="schema-filter__label"]//span[text()="Производитель"]/ancestor::div[@class="schema-filter__fieldset"]//div[@class="schema-filter-control__item"]');
   }
 
-  checkItemByName(name) {
-    cy.xpath(`//div[@class="schema-filter__label"]//span[text()="Производитель"]/ancestor::div[@class="schema-filter__fieldset"]//div[@class="schema-filter-popover__inner"]//input[@value="${name}"]/ancestor::label`).click();
+  itemNameInFilter(name) {
+    return cy.xpath(`//div[@class="schema-filter__label"]//span[text()="Производитель"]/ancestor::div[@class="schema-filter__fieldset"]//div[@class="schema-filter-popover__inner"]//input[@value="${name}"]/ancestor::label`);
   }
 
   sortItemsByPrice(sortBy) {
-    this.sortButton.click();
+    this.click(this.sortButton);
 
     if (sortBy === "asc") {
-      cy.xpath('//div[@id="schema-order"]//span[text()="Дешевые"]').click();
+      this.click(cy.xpath('//div[@id="schema-order"]//span[text()="Дешевые"]'));
     } else if (sortBy === "desc") {
-      cy.xpath('//div[@id="schema-order"]//span[text()="Дорогие"]').click();
+      this.click(cy.xpath('//div[@id="schema-order"]//span[text()="Дорогие"]'));
     }
   }
   
@@ -102,8 +102,8 @@ class CatalogItemsPage extends Base {
   }
 
   filterItemsByName(name) {
-    this.showAllItemListNames();
-    this.checkItemByName(name.toLowerCase());
+    this.click(this.allItemsListNamesFilter);
+    this.click(this.itemNameInFilter(name.toLowerCase()));
   }
 
   isItemsFiltered(name) {
@@ -129,7 +129,7 @@ class CatalogItemsPage extends Base {
   addItemsToCompare(amount) {
     this.addItemToCompareButtons.each((el, index) => {
       if(index < amount) {
-        el[0].click();
+        this.click(el[0]);
       }
     });
   }
