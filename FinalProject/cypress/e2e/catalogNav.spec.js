@@ -2,6 +2,7 @@ import homePage from '../../page-objects/homePage.js';
 import headerComponent from '../../page-objects/components/headerComponent.js';
 import catalogNavPage from '../../page-objects/catalogNavPage.js'
 import catalogItemsPage from '../../page-objects/catalogItemsPage.js';
+import { nav } from '../../helpers/constans.js';
 
 describe('Onliner website catalog navigation testing', () => {
 
@@ -12,7 +13,7 @@ describe('Onliner website catalog navigation testing', () => {
   });
 
   it('Click on any category should open navigation list', () => {
-    catalogNavPage.click(catalogNavPage.electronicsBlockButton);
+    catalogNavPage.click(catalogNavPage.getNavBlockCategoryButton("Электроника"));
     catalogNavPage.catalogNavList.should('exist');
   });
 
@@ -21,7 +22,7 @@ describe('Onliner website catalog navigation testing', () => {
   });
 
   it('Click on opened category should close navigation list', () => {
-    catalogNavPage.click(catalogNavPage.electronicsBlockButton);
+    catalogNavPage.click(catalogNavPage.getNavBlockCategoryButton("Электроника"));
     catalogNavPage.catalogNavList.should('not.exist');
   });
 
@@ -30,7 +31,7 @@ describe('Onliner website catalog navigation testing', () => {
   });
 
   it('Click on mobile phones should return page with title "Мобильные телефоны"', () => {
-    catalogNavPage.goToSmartphones();
+    catalogNavPage.goToItemsList(nav.category.electronics, nav.subCategory.mobiles, nav.product.smartphones);
     catalogItemsPage.mainTitle.should('contain', "Мобильные телефоны");
   });
 });

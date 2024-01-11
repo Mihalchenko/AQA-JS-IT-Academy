@@ -5,18 +5,6 @@ class CatalogNavPage extends Base {
     super()
   }
 
-  get electronicsBlockButton() {
-    return cy.get('li.catalog-navigation-classifier__item[data-id="1"]');
-  }
-
-  get mobilesBlockButton() {
-    return cy.get('div.catalog-navigation-list__category[data-id="1"] div.catalog-navigation-list__aside-item').first();
-  }
-
-  get smartphonesButton() {
-    return cy.get('div.catalog-navigation-list__category[data-id="1"] div.catalog-navigation-list__aside-item a').first();
-  }
-
   get catalogNavTitle() {
     return cy.get('div.catalog-navigation > div.catalog-navigation__title');
   }
@@ -29,11 +17,25 @@ class CatalogNavPage extends Base {
     return cy.get('ul.catalog-bar__list');
   }
 
-  goToSmartphones() {
-    this.click(this.electronicsBlockButton);
-    this.click(this.mobilesBlockButton);
-    this.click(this.smartphonesButton);
+  getNavBlockCategoryButton(category) {
+    return cy.xpath(`//li[contains(@class,"catalog-navigation-classifier__item")]//span[contains(text(), "${category}")]`);
+  }
+
+  getNavBlockSubCategoryButton(subCategory) {
+    return cy.xpath(`//div[contains(@class,"catalog-navigation-list__aside-item")]//div[contains(text(),"${subCategory}")]`);
+  }
+
+  getItemLinkInNavSubCategory(product) {
+    return cy.xpath(`//div[contains(@class,"catalog-navigation-list__aside-item_active")]//span[contains(text(),"${product}")]`)
+  }
+
+  goToItemsList(category, subCategory, product) {
+    this.click(this.getNavBlockCategoryButton(category));
+    this.click(this.getNavBlockSubCategoryButton(subCategory));
+    this.click(this.getItemLinkInNavSubCategory(product));
   }
 }
 
 export default new CatalogNavPage();
+
+//a[contains(@class,"catalog-navigation-list__dropdown-item")]//span[contains(text(),"Смартфоны")]
