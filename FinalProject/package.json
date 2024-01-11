@@ -1,0 +1,23 @@
+{
+  "name": "final-project_mihalchenko",
+  "version": "1.0.0",
+  "description": "onliner.by website testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx cypress open",
+    "lint": "eslint ."
+  },
+  "author": "mihalchenko",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.3.10",
+    "chai-json-schema": "^1.5.1",
+    "cypress": "13.6.0",
+    "cypress-plugin-api": "^2.11.1",
+    "cypress-real-events": "^1.11.0",
+    "cypress-xpath": "^2.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0"
+  }
+}
