@@ -45,28 +45,31 @@ class CatalogItemsPage extends Base {
     return cy.xpath('//div[@class="schema-filter__label"]//span[text()="Производитель"]/ancestor::div[@class="schema-filter__fieldset"]//div[@class="schema-filter-control__item"]');
   }
 
-  itemNameInFilter(name) {
+  get addItemToCompareButtons() {
+    return cy.get('label.schema-product__control');
+  }
+
+  getItemNameInFilter(name) {
     return cy.xpath(`//div[@class="schema-filter__label"]//span[text()="Производитель"]/ancestor::div[@class="schema-filter__fieldset"]//div[@class="schema-filter-popover__inner"]//input[@value="${name}"]/ancestor::label`);
   }
 
-  sortItemsByPrice(sortBy) {
-    this.click(this.sortButton);
+  getSortItemsByLink(sortBy) {
+    return cy.xpath(`//div[@id="schema-order"]//span[text()="${sortBy === "asc" && "Дешевые" || sortBy === "desc" && "Дорогие"}"]`);
+  }
 
-    if (sortBy === "asc") {
-      this.click(cy.xpath('//div[@id="schema-order"]//span[text()="Дешевые"]'));
-    } else if (sortBy === "desc") {
-      this.click(cy.xpath('//div[@id="schema-order"]//span[text()="Дорогие"]'));
-    }
+  sortItemsBy(sortBy) {
+    this.click(this.sortButton);
+    this.click(this.getSortItemsByLink(sortBy));
   }
   
   waitForListItemsUpdate(sortBy, condition, type) {
-    if (type == "sort") {
+    if (type === "sort") {
       cy.intercept({
         method: 'GET',
-        url: `https://catalog.onliner.by/sdapi/catalog.api/search/notebook${condition == "used" && '/second-offers?segment=second&' || condition == "new" && '?'}order=price:${sortBy}`,
+        url: `https://catalog.onliner.by/sdapi/catalog.api/search/notebook${condition === "used" && '/second-offers?segment=second&' || condition === "new" && '?'}order=price:${sortBy}`,
       }).as('apiSortCheck');
       cy.wait('@apiSortCheck');
-    } else if (type == "filter") {
+    } else if (type === "filter") {
       cy.intercept({
         method: 'GET',
         url: `https://catalog.onliner.by/sdapi/catalog.api/search/notebook/second-offers?mfr[0]=${sortBy.toLowerCase()}&segment=second&order=price:desc`,
@@ -75,14 +78,14 @@ class CatalogItemsPage extends Base {
     }
   }
 
-  isItemsSorted(sortBy, condition) {
+  checkItemsSorted(sortBy, condition) {
     this.waitForListItemsUpdate(sortBy, condition, "sort");
 
     let prev;
     let result = true;
 
-    (condition == "new" && this.newItemsListPrices || condition == "used" && this.usedItemsListPrices).each((el) => {
-      let currentEl = parseFloat(el[0].innerText.replace(/[\s,]/g, m => (m == ',') ? '.' : ''));
+    (condition === "new" && this.newItemsListPrices || condition === "used" && this.usedItemsListPrices).each((el) => {
+      let currentEl = parseFloat(el[0].innerText.replace(/[\s,]/g, m => (m === ',') ? '.' : ''));
       
       if (sortBy === "asc") {
         if(currentEl < prev) {
@@ -103,10 +106,10 @@ class CatalogItemsPage extends Base {
 
   filterItemsByName(name) {
     this.click(this.allItemsListNamesFilter);
-    this.click(this.itemNameInFilter(name.toLowerCase()));
+    this.click(this.getItemNameInFilter(name.toLowerCase()));
   }
 
-  isItemsFiltered(name) {
+  checkItemsFiltered(name) {
     this.waitForListItemsUpdate(name, null, "filter");
 
     let result = true;
@@ -120,10 +123,6 @@ class CatalogItemsPage extends Base {
     cy.then(() => {
       expect(result).to.be.true;
     });
-  }
-
-  get addItemToCompareButtons() {
-    return cy.get('label.schema-product__control');
   }
 
   addItemsToCompare(amount) {

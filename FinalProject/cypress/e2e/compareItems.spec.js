@@ -26,7 +26,7 @@ describe('Onliner compare catalog items tests', () => {
   });
 
   it(`Deleting all exept one of items from compare should exclude delete item button`, () => {
-    compareItemsPage.leaveOneItemInCompare();
+    compareItemsPage.leaveItemsInCompare(1);
     compareItemsPage.deleteItemsFromCompareButtons.should('not.exist');
   });
 

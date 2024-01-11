@@ -25,10 +25,10 @@ class CompareItemsPage extends Base {
     this.click(this.deleteItemsFromCompareButtons.first());
   }
 
-  leaveOneItemInCompare() {
+  leaveItemsInCompare(num) {
     this.itemsInCompare.then((arr) => {
         let leng = arr.length;
-        while (leng !== 1) {
+        while (leng !== num) {
             this.deleteOneItemFromCompare();
             leng-=1;
         }

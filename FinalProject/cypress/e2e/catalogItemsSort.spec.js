@@ -6,13 +6,13 @@ describe('Onliner website catalog items sort testing', () => {
 
   it('Sort catalog items(new) by price increase should return items sorted by price increase', () => {
     homePage.navigate('https://catalog.onliner.by/notebook');
-    catalogItemsPage.sortItemsByPrice(sortBy.priceAsc);
-    catalogItemsPage.isItemsSorted(sortBy.priceAsc, condition.new);
+    catalogItemsPage.sortItemsBy(sortBy.priceAsc);
+    catalogItemsPage.checkItemsSorted(sortBy.priceAsc, condition.new);
   });
 
   it('Sort catalog items(new) by price decrease should return items sorted by price decrease', () => {
-    catalogItemsPage.sortItemsByPrice(sortBy.priceDesc);
-    catalogItemsPage.isItemsSorted(sortBy.priceDesc, condition.new);
+    catalogItemsPage.sortItemsBy(sortBy.priceDesc);
+    catalogItemsPage.checkItemsSorted(sortBy.priceDesc, condition.new);
   });
 
   it('Click on "Объявления" should open item list with used items', () => {
@@ -21,18 +21,18 @@ describe('Onliner website catalog items sort testing', () => {
   })
 
   it('Sort catalog items(used) by price increase should return items sorted by price increase', () => {
-    catalogItemsPage.sortItemsByPrice(sortBy.priceAsc);
-    catalogItemsPage.isItemsSorted(sortBy.priceAsc, condition.used);
+    catalogItemsPage.sortItemsBy(sortBy.priceAsc);
+    catalogItemsPage.checkItemsSorted(sortBy.priceAsc, condition.used);
   });
 
   it('Sort catalog items(used) by price decrease should return items sorted by price decrease', () => {
-    catalogItemsPage.sortItemsByPrice(sortBy.priceDesc);
-    catalogItemsPage.isItemsSorted(sortBy.priceDesc, condition.used);
+    catalogItemsPage.sortItemsBy(sortBy.priceDesc);
+    catalogItemsPage.checkItemsSorted(sortBy.priceDesc, condition.used);
   });
 
   it('Filter by name should return items filtered by name', () => {
     const productName = 'Xiaomi';
     catalogItemsPage.filterItemsByName(productName);
-    catalogItemsPage.isItemsFiltered(productName);
+    catalogItemsPage.checkItemsFiltered(productName);
   });
 });
